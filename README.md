@@ -40,9 +40,10 @@ E- Insurance Project Description
         > Payment Receipt module
         > Contact form
         > View customer query
-
     The customers or policy holders can register their account and they can create their new policy account. The customer needs to enter their profile details to apply for policy. The system displays policy information and plan details before applying policy. After policy registration the system generates policy receipt.
     The customers can send queries using contact form. Employees can view customers query in the customer query panel.
+
+   
 
 • Insurance Agent module:
     The agents work for insurance company who provides information regarding the policies and schemes and brings new customers to the insurance company. The agents earn commission for each and every policy registration. Admin adds agent by verifying their profile manually.
