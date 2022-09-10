@@ -49,10 +49,10 @@ async function login(req, resp)
             resp.status(401).send("Invalid Credentials")
             return;
         }
-        const newPayload = new JWTPayload(dUser)
+        const newPayload = new JWTPayload(dEmplyee)
         const newToken = newPayload.createToken();
         resp.cookie("mytoken",newToken)
-        resp.status(201).send(dUser);
+        resp.status(201).send("Login Done");
         return;
     }
 }

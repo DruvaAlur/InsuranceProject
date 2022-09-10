@@ -20,7 +20,7 @@ class Customer
         this.isActive          =    true;
     }
 
-    static async createNewCustomer(firstName,lastName,userName,password,dob,address,email,role,state,city,pincode,nominee,nomineeRelation)
+    static async createNewCustomer(firstName,lastName,userName,password,dob,address,email,state,city,pincode,nominee,nomineeRelation)
     {
 
         const [flag,message,newCredential] = await Credentials.createCredential(userName,password);
@@ -28,8 +28,10 @@ class Customer
         {
             return [false,"CustomerName already Exists"]
         }
+        const role = "customer";
         const db = new DatabaseMongoose();
-        await db.insertOneUser(new Customer(firstName,lastName,newCredential,dob,address,email,role,state,city,pincode,nominee,nomineeRelation));
+        let dCredential = await db.insertOneCred(newCredential);
+        await db.insertOneCustomer(new Customer(firstName,lastName,dCredential,dob,address,email,role,state,city,pincode,nominee,nomineeRelation));
         return [true,"New Customer created"];
     }
 

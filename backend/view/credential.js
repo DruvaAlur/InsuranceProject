@@ -45,8 +45,7 @@ class Credentials
         }
         let newCredential = new Credentials(userName,password);
         newCredential.password = await newCredential.getHashPassword();
-        let dCredential = await db.insertOneCred(newCredential);
-        return [true,"Credential Created",dCredential];
+        return [true,"Credential Created",newCredential];
     }
 }
 module.exports = Credentials;

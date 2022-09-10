@@ -3,7 +3,7 @@ const {DatabaseMongoose} = require('../repository/database')
 const bcrypt = require('bcrypt');
 class Employee
 {
-    constructor(firstName,lastName,credential,dob,email,age,role)
+    constructor(firstName,lastName,credential,dob,age,email,role)
     {
         this.firstName   =    firstName;
         this.lastName    =    lastName;
@@ -25,8 +25,9 @@ class Employee
         }
         let age = await Employee.age(dob);
         const db = new DatabaseMongoose();
-        await db.insertOneEmployee(new Employee(firstName,lastName,newCredential, dob,age,email,age,role));
-        return [true,"ADmin Created Sucessfully"];
+        const dCredential = await db.insertOneCred(newCredential);
+        await db.insertOneEmployee(new Employee(firstName,lastName,dCredential, dob,age,email,role));
+        return [true,"Employee Created Sucessfully"];
     }
 
     static async createAdmin(userName,password,firstName,lastName,dob,email)
@@ -37,9 +38,11 @@ class Employee
         {
             return [false ,"LoginID Already Exists"];
         }
+        console.log("l;",newCredential)
         let age = await Employee.age(dob);
         const db = new DatabaseMongoose();
-        await db.insertOneEmployee(new Employee(firstName,lastName,newCredential, dob,age,email,role));
+        let dCredential = await db.insertOneCred(newCredential);
+        await db.insertOneEmployee(new Employee(firstName,lastName,dCredential, dob,age,email,role));
         return [true,"ADmin Created Sucessfully"];
     }
 
@@ -74,7 +77,7 @@ class Employee
     {
         const db = new DatabaseMongoose();
         const findEmployee = await db.findOneEmployee({"_id":employeeId})
-        if(findEmployee && findEmployee.isActive == true)
+        if(findEmployee)
         {
             return [findEmployee,true];
         }
@@ -97,12 +100,13 @@ class Employee
 
     static async update(userName, propertyToUpdate, value)
     {
-        let [dUser,isUserExist] = await Employee.findOneEmployee(userName);
+        const db = new DatabaseMongoose();
+        let [dUser,isUserExist] = await Employee.findEmployee(userName);
         if(!isUserExist)
         {
             return [false,"User Not Exist"];
         }
-        const db = new DatabaseMongoose();
+        
         switch (propertyToUpdate) 
         {
             case "FirstName": 

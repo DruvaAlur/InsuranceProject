@@ -6,7 +6,7 @@ const CustomerSchema = mongoose.Schema({
     lastName        :  {type:String ,required: true},
     credential      :  {type: mongoose.SchemaTypes.ObjectId,ref:"Credentials"},
     dateOfBirth     :  {type:Date},
-    age             :  {type:Number, min: [25, 'Must be at least 23']},
+    age             :  {type:Number, min: [21, 'Must be at least 21']},
     address         :  {type:String},
     email           :  {type: String, 
                             unique     : true, 

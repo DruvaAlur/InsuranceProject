@@ -2,9 +2,15 @@ const Employee = require('../../view/employee');
 const JWTPayload = require('../../view/authentication.js');
 const Credentials = require('../../view/credential.js');
 
+async function createAdmin()
+{
+    await Employee.createAdmin("ankit","ankit@123","Ankit","Raj","2000-11-17","ar82091@gmail.com");
+    return;
+}
+
 async function createEmployee(req,resp)
 {
-    const newPayload = new JWTPayload.isValidateToken(req,resp,req.cookies['mytoken']);
+    const newPayload = JWTPayload.isValidateToken(req,resp,req.cookies['mytoken']);
     if(newPayload.role != "admin")
     {
         resp.status(401).send("please specify this role to admin");
@@ -117,4 +123,4 @@ async function deleteEmployee (req,resp)
     return;
 }
 
-module.exports = {createEmployee,getAllEmployee,noOfEmployee,updateEmployee,deleteEmployee};
+module.exports = {createAdmin,createEmployee,getAllEmployee,noOfEmployee,updateEmployee,deleteEmployee};
