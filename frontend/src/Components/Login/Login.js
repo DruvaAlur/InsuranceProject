@@ -1,9 +1,21 @@
 import "./Login.css";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 function Login() {
   const navigation = new useNavigate();
+  const userName = useState("");
+  const password = useState("");
   const registerUser = () => {
     navigation("/Register");
+  };
+  const onLogin = async () => {
+    await axios
+      .post("http://localhost:8082/api/v1/login", { userName, password })
+      .then(navigation("/CustomerDashboard"))
+      .catch();
   };
   return (
     <>
@@ -12,41 +24,55 @@ function Login() {
           <div className="wrap-login1001">
             <form className="login100-form1 validate-form">
               <span className="login100-form-title1 p-b-48">
-                <i className="zmdi zmdi-font">E-Insurance</i>
+                <i className="zmdi zmdi-font" style={{ color: "#AE2CFF" }}>
+                  E-Insurance
+                </i>
               </span>
               <br></br>
-              <span className="login100-form-title1">Login</span>
+              <span
+                className="login100-form-title1"
+                style={{ color: "#27CCFD" }}
+              >
+                Login
+              </span>
 
               <br></br>
-              <div
-                className="wrap-input1001 validate-input"
-                data-validate="Valid email is: a@b.c"
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "30ch" },
+                }}
+                noValidate
+                autoComplete="off"
               >
-                <input className="input100" type="text" name="email" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Email"
-                ></span>
-              </div>
-
-              <div
-                className="wrap-input1001 validate-input"
-                data-validate="Enter password"
+                <TextField
+                  id="standard-basic"
+                  label="Username"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "30ch" },
+                }}
+                noValidate
+                autoComplete="off"
               >
-                <span className="btn-show-pass">
-                  <i className="zmdi zmdi-eye"></i>
-                </span>
-                <input className="input100" type="password" name="pass" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Password"
-                ></span>
-              </div>
+                <TextField
+                  id="standard-basic"
+                  label="Standard"
+                  variant="standard"
+                />
+              </Box>
+              <br />
 
               <div className="container-login100-form-btn1">
                 <div className="wrap-login100-form-btn1">
                   <div className="login100-form-bgbtn1"></div>
-                  <button className="login100-form-btn1">Login</button>
+                  <button className="login100-form-btn1" onClick={onLogin}>
+                    Login
+                  </button>
                 </div>
               </div>
 

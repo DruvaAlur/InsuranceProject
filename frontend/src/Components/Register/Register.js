@@ -1,4 +1,6 @@
 import "./Register.css";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 function Login() {
   return (
     <>
@@ -6,124 +8,191 @@ function Login() {
         <div className="container-login100">
           <div className="wrap-login100">
             <span className="login100-form-title p-b-48">
-              <i className="zmdi zmdi-font">E-Insurance</i>
+              <i className="zmdi zmdi-font" style={{ color: "#AE2CFF" }}>
+                E-Insurance
+              </i>
             </span>
             <br></br>
-            <span className="login100-form-title p-b-26">Register</span>
+            <span
+              className="login100-form-title p-b-26"
+              style={{ color: "#27CCFD" }}
+            >
+              Register
+            </span>
+            <br />
+            <br />
+
             <form className="login100-form validate-form">
-              <div className="wrap-input100 validate-input">
-                <input className="input100" type="text" name="Firstname" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Firstname"
-                ></span>
-              </div>
-              <div className="wrap-input100 validate-input">
-                <input className="input100" type="text" name="Lastname" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Lastname"
-                ></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
               >
-                <input className="input100" type="text" name="Username" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Username"
-                ></span>
-              </div>
-              <div className="wrap-input100 validate-input">
-                {/* <span className="btn-show-pass">
-                  <i className="zmdi zmdi-eye">a</i>
-                </span> */}
-                <input className="input100" type="password" name="pass" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Password"
-                ></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input className="input100" type="text" name="DOB" />
-                <span className="focus-input100" data-placeholder="DOB"></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input className="input100" type="text" name="Address" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Address"
-                ></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input className="input100" type="text" name="Email" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Email"
-                ></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input className="input100" type="text" name="State" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="State"
-                ></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input className="input100" type="text" name="City" />
-                <span className="focus-input100" data-placeholder="City"></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input className="input100" type="text" name="Pincode" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Pincode"
-                ></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input className="input100" type="text" name="Nominee" />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Nominee"
-                ></span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Valid email is: a@b.c"
-              >
-                <input
-                  className="input100"
-                  type="text"
-                  name="Nominee Relation"
+                <TextField
+                  id="standard-basic"
+                  label="Firstname"
+                  variant="standard"
                 />
-                <span
-                  className="focus-input100"
-                  data-placeholder="Nominee Relation"
-                ></span>
-              </div>
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="Lastname"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="Username"
+                  variant="standard"
+                />
+              </Box>
+
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="Password"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField id="standard-basic" label="DOB" variant="standard" />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="Address"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="Email"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="State"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="City"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="Pincode"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="standard-basic"
+                  label="Nominee"
+                  variant="standard"
+                />
+              </Box>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "32ch" },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                {" "}
+                <TextField
+                  id="standard-basic"
+                  label="Nominee Relation"
+                  variant="standard"
+                />
+              </Box>
             </form>
+            <br />
+            <br />
+
             <div className="container-login100-form-btn">
               <div className="wrap-login100-form-btn">
                 <div className="login100-form-bgbtn"></div>
