@@ -2,12 +2,13 @@ const Credentials = require('./credential');
 const {DatabaseMongoose} = require('../repository/database')
 class Customer
 {
-    constructor(firstName,lastName,credential,dob,address,email,role,state,city,pincode,nominee,nomineeRelation)
+    constructor(firstName,lastName,credential,dob,age,address,email,role,state,city,pincode,nominee,nomineeRelation)
     {
         this.firstName         =    firstName;
         this.lastName          =    lastName;
         this.credential        =    credential;
-        this.dob               =    dob;
+        this.dateOfBirth       =    dob;
+        this.age               =    age;
         this.address           =    address;
         this.email             =    email;
         this.role              =    role;
@@ -29,21 +30,22 @@ class Customer
             return [false,"CustomerName already Exists"]
         }
         const role = "customer";
+        let age = Customer.age(dob);
         const db = new DatabaseMongoose();
         let dCredential = await db.insertOneCred(newCredential);
-        await db.insertOneCustomer(new Customer(firstName,lastName,dCredential,dob,address,email,role,state,city,pincode,nominee,nomineeRelation));
+        await db.insertOneCustomer(new Customer(firstName,lastName,dCredential,dob,age,address,email,role,state,city,pincode,nominee,nomineeRelation));
         return [true,"New Customer created"];
     }
 
     static async findCustomer(userName)
     {
         const db = new DatabaseMongoose();
-        const findCred = db.findOneCred({"userName":userName});
+        const findCred = await db.findOneCred({"userName":userName});
         if(!findCred)
         {
             return [null,false];
         }
-        const findCustomer = db.findOneCustomer({"credential":findCred._id});
+        const findCustomer = await db.findOneCustomer({"credential":findCred._id});
         if(findCustomer && findCustomer.isActive)
         {
             return [findCustomer,true];
@@ -55,7 +57,7 @@ class Customer
     {
         const db = new DatabaseMongoose();
         const findCustomer = await db.findOneCustomer({"_id":CustomerId})
-        if(findCustomer && findCustomer.isActive == true)
+        if(findCustomer)
         {
             return [findCustomer,true];
         }
@@ -74,6 +76,12 @@ class Customer
         const db = new DatabaseMongoose();
         await db.updateOneCustomer({_id:customerId},{$set:{isActive:isactive}})
         return ;
+    }
+
+    static age(dateOfBirth)
+    {
+        const yearOfBirth = new Date(dateOfBirth);
+        return 2022-yearOfBirth.getFullYear(); 
     }
 
     static async updateCustomer(userName, propertyToUpdate, value)
@@ -98,8 +106,9 @@ class Customer
                 await db.updateOneCred({_id:dUser.credential},{$set:{userName:value}}) 
                 return [true,"Updated"];
             
-            case "dob":
-                await db.updateOneCustomer({_id:dUser._id},{$set:{dob:value}})
+            case "dateOfBirth":
+                await db.updateOneCustomer({_id:dUser._id},{$set:{dateOfBirth:value}})
+                await db.updateOneCustomer({_id:dUser._id},{$set:{age:Customer.age(value)}});
                 return [true,"Updated"];
 
             case "address":
