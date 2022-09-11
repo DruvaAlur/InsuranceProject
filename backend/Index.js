@@ -27,7 +27,7 @@ app.post ("/api/v1/createCustomer",          async(req,resp)  =>  createCustomer
 app.post ("/api/v1/getAllCustomer",          async(req,resp)  =>  getAllCustomer  (req,resp));
 app.get  ("/api/v1/numberOfCustomer",        async(req,resp)  =>  noOfCustomer    (req,resp));
 app.put  ("/api/v1/updateCustomer/:userName",async(req,resp)  =>  updateCustomer  (req,resp));
-app.put  ("/api/v1/deleteCustomer/:userName",async(req,resp)  =>  deleteCustomer  (req,resp));
+app.post ("/api/v1/deleteCustomer/:userName",async(req,resp)  =>  deleteCustomer  (req,resp));
 
 
 
