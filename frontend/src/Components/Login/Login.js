@@ -1,21 +1,28 @@
 import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 function Login() {
   const navigation = new useNavigate();
-  const userName = useState("");
-  const password = useState("");
+  const [userName, updateUserName] = useState("");
+  const [password, updatePassword] = useState("");
   const registerUser = () => {
     navigation("/Register");
   };
-  const onLogin = async () => {
+  const onLogin = async (e) => {
+    e.preventDefault();
+
     await axios
       .post("http://localhost:8082/api/v1/login", { userName, password })
-      .then(navigation("/CustomerDashboard"))
-      .catch();
+      .then((resp) => {
+        console.log(resp.data);
+        navigation("/CustomerDashboard");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
   };
   return (
     <>
@@ -38,7 +45,7 @@ function Login() {
 
               <br></br>
               <Box
-                component="form"
+                // component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "30ch" },
                 }}
@@ -49,10 +56,11 @@ function Login() {
                   id="standard-basic"
                   label="Username"
                   variant="standard"
+                  onChange={(e) => updateUserName(e.target.value)}
                 />
               </Box>
               <Box
-                component="form"
+                // component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "30ch" },
                 }}
@@ -61,8 +69,9 @@ function Login() {
               >
                 <TextField
                   id="standard-basic"
-                  label="Standard"
+                  label="Password"
                   variant="standard"
+                  onChange={(e) => updatePassword(e.target.value)}
                 />
               </Box>
               <br />
@@ -70,7 +79,11 @@ function Login() {
               <div className="container-login100-form-btn1">
                 <div className="wrap-login100-form-btn1">
                   <div className="login100-form-bgbtn1"></div>
-                  <button className="login100-form-btn1" onClick={onLogin}>
+                  <button
+                    className="login100-form-btn1"
+                    onClick={onLogin}
+                    style={{ width: "100%" }}
+                  >
                     Login
                   </button>
                 </div>
@@ -81,7 +94,11 @@ function Login() {
                 <br></br>
                 <span className="txt1">Don’t have an account?</span>
 
-                <a className="txt2" href="!#" onClick={registerUser}>
+                <a
+                  className="txt2"
+                  style={{ onHover: { cursor: "pointer" } }}
+                  onClick={registerUser}
+                >
                   Sign Up
                 </a>
               </div>

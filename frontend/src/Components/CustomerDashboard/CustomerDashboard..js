@@ -1,8 +1,6 @@
+import NavBar from "../NavBar/NavBar";
+
 function CustomerDashboard() {
-  return (
-    <>
-      <p>Cudtomer Dashboard</p>
-    </>
-  );
+  return <>{/* <NavBar /> */}</>;
 }
 export default CustomerDashboard;

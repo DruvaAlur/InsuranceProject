@@ -1,7 +1,48 @@
 import "./Register.css";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Login() {
+  const navigation = new useNavigate();
+  const [firstName, updateFirstName] = useState("");
+  const [lastName, updateLastName] = useState("");
+  const [userName, updateUserName] = useState("");
+  const [password, updatePassword] = useState("");
+  const [dateOfBirth, updateDateOfBirth] = useState("");
+  const [address, updateAddress] = useState("");
+  const [email, updateEmail] = useState("");
+  const [state, updateState] = useState("");
+  const [city, updateCity] = useState("");
+  const [pincode, updatePincode] = useState("");
+  const [nominee, updateNominee] = useState("");
+  const [nomineeRelation, updateNomineeRelation] = useState("");
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:8082/api/v1/createCustomer", {
+        firstName,
+        lastName,
+        userName,
+        password,
+        dateOfBirth,
+        address,
+        email,
+        state,
+        city,
+        pincode,
+        nominee,
+        nomineeRelation,
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        navigation("/");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
   return (
     <>
       <div className="limiter">
@@ -24,7 +65,6 @@ function Login() {
 
             <form className="login100-form validate-form">
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -35,10 +75,10 @@ function Login() {
                   id="standard-basic"
                   label="Firstname"
                   variant="standard"
+                  onChange={(e) => updateFirstName(e.target.value)}
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -49,10 +89,10 @@ function Login() {
                   id="standard-basic"
                   label="Lastname"
                   variant="standard"
+                  onChange={(e) => updateLastName(e.target.value)}
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -62,12 +102,12 @@ function Login() {
                 <TextField
                   id="standard-basic"
                   label="Username"
+                  onChange={(e) => updateUserName(e.target.value)}
                   variant="standard"
                 />
               </Box>
 
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -78,20 +118,24 @@ function Login() {
                   id="standard-basic"
                   label="Password"
                   variant="standard"
+                  onChange={(e) => updatePassword(e.target.value)}
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
                 noValidate
                 autoComplete="off"
               >
-                <TextField id="standard-basic" label="DOB" variant="standard" />
+                <TextField
+                  id="standard-basic"
+                  label="DOB"
+                  variant="standard"
+                  onChange={(e) => updateDateOfBirth(e.target.value)}
+                />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -101,11 +145,11 @@ function Login() {
                 <TextField
                   id="standard-basic"
                   label="Address"
+                  onChange={(e) => updateAddress(e.target.value)}
                   variant="standard"
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -115,11 +159,11 @@ function Login() {
                 <TextField
                   id="standard-basic"
                   label="Email"
+                  onChange={(e) => updateEmail(e.target.value)}
                   variant="standard"
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -129,11 +173,11 @@ function Login() {
                 <TextField
                   id="standard-basic"
                   label="State"
+                  onChange={(e) => updateState(e.target.value)}
                   variant="standard"
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -144,10 +188,10 @@ function Login() {
                   id="standard-basic"
                   label="City"
                   variant="standard"
+                  onChange={(e) => updateCity(e.target.value)}
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -157,11 +201,11 @@ function Login() {
                 <TextField
                   id="standard-basic"
                   label="Pincode"
+                  onChange={(e) => updatePincode(e.target.value)}
                   variant="standard"
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -170,12 +214,12 @@ function Login() {
               >
                 <TextField
                   id="standard-basic"
+                  onChange={(e) => updateNominee(e.target.value)}
                   label="Nominee"
                   variant="standard"
                 />
               </Box>
               <Box
-                component="form"
                 sx={{
                   "& > :not(style)": { m: 1, width: "32ch" },
                 }}
@@ -186,6 +230,7 @@ function Login() {
                 <TextField
                   id="standard-basic"
                   label="Nominee Relation"
+                  onChange={(e) => updateNomineeRelation(e.target.value)}
                   variant="standard"
                 />
               </Box>
@@ -196,7 +241,9 @@ function Login() {
             <div className="container-login100-form-btn">
               <div className="wrap-login100-form-btn">
                 <div className="login100-form-bgbtn"></div>
-                <button className="login100-form-btn">Register</button>
+                <button className="login100-form-btn" onClick={handleRegister}>
+                  Register
+                </button>
               </div>
             </div>
             <br></br>

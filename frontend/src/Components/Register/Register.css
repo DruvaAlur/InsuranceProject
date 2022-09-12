@@ -207,6 +207,7 @@ iframe {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -220,6 +221,7 @@ iframe {
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
+  overflow-y: scroll;
   padding: 33px 55px 33px 55px;
   height: 90vh;
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -228,7 +230,9 @@ iframe {
   -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
-
+.wrap-login100::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
 /*------------------------------------------------------------------
   [ Form ]*/
 
