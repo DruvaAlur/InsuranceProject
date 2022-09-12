@@ -33,7 +33,12 @@ class Customer
         let age = Customer.age(dob);
         const db = new DatabaseMongoose();
         let dCredential = await db.insertOneCred(newCredential);
-        await db.insertOneCustomer(new Customer(firstName,lastName,dCredential,dob,age,address,email,role,state,city,pincode,nominee,nomineeRelation));
+        let [record,isInserted]=await db.insertOneCustomer(new Customer(firstName,lastName,dCredential,dob,age,address,email,role,state,city,pincode,nominee,nomineeRelation));
+        if(!isInserted)
+        {
+            await db.deleteOneCred({"_id":dCredential._id});
+            return [false,record];
+        }
         return [true,"New Customer created"];
     }
 
